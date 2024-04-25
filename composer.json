@@ -1,5 +1,5 @@
 {
-    "name": "protonlabs/paypal-sdk-core-php",
+    "name": "fysiki/paypal-sdk-core-php",
     "description": "PayPal Core SDK for PHP",
     "keywords": ["paypal", "php", "sdk"],
     "type": "library",

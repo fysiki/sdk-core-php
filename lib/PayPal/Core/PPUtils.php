@@ -120,8 +120,14 @@ class PPUtils
             for ($i = 0; $i < (int)$children->length; $i++) {
                 $child = $children->item($i);
                 if ($child !== null) {
+                    $nodeName = $child->nodeName;
+                    if (strpos($nodeName, 'ns4:') === 0) {
+                        // Remove the 'ns4:' prefix
+                        $nodeName = substr($nodeName, 4);
+                    }
+
                     if ($child->childNodes->item(0) instanceof \DOMText) {
-                        $result[$i]['name'] = $child->nodeName;
+                        $result[$i]['name'] = $nodeName;
                         $result[$i]['text'] = $child->childNodes->item(0)->nodeValue;
                         if ($child->hasAttributes()) {
                             foreach ($child->attributes as $k => $v) {
@@ -130,8 +136,8 @@ class PPUtils
                                 }
                             }
                         }
-                    } else if (!in_array($child->nodeName, $result)) {
-                        $result[$i]['name']     = $child->nodeName;
+                    } else if (!in_array($nodeName, $result)) {
+                        $result[$i]['name']     = $nodeName;
                         $result[$i]['children'] = PPUtils::xmlNodeToArray($child);
 
                         if ($child->hasAttributes()) {
